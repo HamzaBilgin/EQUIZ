@@ -12,6 +12,8 @@ import RegisterPage from "./pages/Register";
 import LoginPage from "./pages/Login";
 
 import InstructorPage from "./pages/Instructor";
+import Quiz from "./components/Instructor/Quiz";
+import Result from "./components/Instructor/Result";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,8 @@ const router = createBrowserRouter([
       { path: "register", element: <RegisterPage /> },
       { path: "login", element: <LoginPage /> },
       { path: "instructor", element: <InstructorPage /> },
+      { path: "instructor/quiz", element: <Quiz /> },
+      { path: "instructor/result", element: <Result /> },
     ],
   },
 ]);
