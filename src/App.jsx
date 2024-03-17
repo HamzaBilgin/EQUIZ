@@ -11,6 +11,8 @@ import RootLayout from "./pages/Root";
 import RegisterPage from "./pages/Register";
 import LoginPage from "./pages/Login";
 
+import InstructorPage from "./pages/Instructor";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +22,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "register", element: <RegisterPage /> },
       { path: "login", element: <LoginPage /> },
+      { path: "instructor", element: <InstructorPage /> },
     ],
   },
 ]);
