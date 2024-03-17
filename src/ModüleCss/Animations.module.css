@@ -1,0 +1,12 @@
+.midleToRight:hover {
+  animation: midleToRight 0.5s linear 0s infinite alternate both running;
+}
+
+@keyframes midleToRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(10px);
+  }
+}
