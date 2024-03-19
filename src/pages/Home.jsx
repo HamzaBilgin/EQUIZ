@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { quizCategory } from "../mockData/home/mainPageQuizes.js";
 import HomeCourses from "../components/home/HomeCourses.jsx";
+import Instructor from "../components/Instructor/Instructor.jsx";
 
 const HomePage = () => {
   return (

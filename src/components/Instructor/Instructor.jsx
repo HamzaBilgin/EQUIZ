@@ -1,22 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { QuizUI, ResultUI } from "./InstructorUI";
 
 const Instructor = () => {
   return (
-    <div className="flex flex-row justify-center items-center h-full w-full">
+    <div className="flex flex-row justify-center items-center h-full w-full gap-3">
       <Link
         to="/instructor/quiz"
         relative="path"
-        className="p-5 border rounded-full cursor-pointer m-2"
+        className="p-5 cursor-pointer m-2 "
       >
-        <span>QUIZ</span>
+        <QuizUI />
       </Link>
       <Link
         to="/instructor/result"
         relative="path"
-        className="p-5 border rounded-full cursor-pointer m-2"
+        className="p-5  cursor-pointer m-2"
       >
-        <span>RESULT</span>
+        <ResultUI />
       </Link>
     </div>
   );

@@ -1,8 +1,12 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Button, Card } from "antd";
 
 const Quiz = () => {
-  return <div>QUIZ</div>;
+  return (
+    <>
+      <p>quiz sayfası</p>
+    </>
+  );
 };
 
 export default Quiz;
