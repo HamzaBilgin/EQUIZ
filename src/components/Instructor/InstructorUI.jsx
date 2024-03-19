@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button, Card } from "antd";
 
 export const QuizUI = () => {
@@ -21,9 +22,11 @@ export const QuizUI = () => {
           />
         }
       >
-        <Button type="primary" ghost>
-          Quiz İşlemleri
-        </Button>
+        <Link to="/instructor/quiz" relative="path">
+          <Button type="primary" ghost>
+            Quiz İşlemleri2
+          </Button>
+        </Link>
       </Card>
     </>
   );
@@ -48,9 +51,11 @@ export const ResultUI = () => {
         />
       }
     >
-      <Button type="primary" ghost>
-        Sonuçları Görüntüle
-      </Button>
+      <Link to="/instructor/result" relative="path">
+        <Button type="primary" ghost>
+          Sonuçları Görüntüle
+        </Button>
+      </Link>
     </Card>
   );
 };
