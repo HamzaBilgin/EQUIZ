@@ -62,7 +62,7 @@ const top10Items = [
 ];
 const Header = () => {
   return (
-    <header className="fixed w-full top-0 left-0">
+    <header className="fixed w-full top-0 left-0 bg-white z-10">
       <nav className=" border-gray-200 px-4 lg:px-4 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link to=".." relative="path" className="w-[300px]">
