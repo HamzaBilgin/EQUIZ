@@ -1,7 +1,8 @@
 import React from "react";
+import { Button, Card } from "antd";
 
 const Result = () => {
-  return <div>Result</div>;
+  return <p>resolt sayfası</p>;
 };
 
 export default Result;
