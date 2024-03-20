@@ -1,7 +1,10 @@
 import React from "react";
 import { Rate } from "antd";
-const QuizItem = ({ data }) => {
-  const { quiz_name, instructor, score, vote_count } = data;
+import { useNavigate } from "react-router-dom";
+const QuizItem = ({ data, category_name }) => {
+  const { id, quiz_name, instructor, score, vote_count, questionAmount } = data;
+
+  const navigate = useNavigate();
   function roundNumber(value) {
     let enlargedNumber = Math.round(value * 100);
 
@@ -13,9 +16,14 @@ const QuizItem = ({ data }) => {
       return Math.round(value);
     }
   }
-
+  const startQuiz = () => {
+    navigate(`/liveQuiz/${category_name}/${id}/${questionAmount}`);
+  };
   return (
-    <div className="mr-3 py-3 rounded-xl  border border-indigo-500 text-center transition-all hover:-translate-y-1 hover:shadow-[10px_10px_10px_rgba(0,0,0,0.3)] cursor-pointer">
+    <div
+      onClick={() => startQuiz()}
+      className="mr-3 py-3 rounded-xl  border border-indigo-500 text-center transition-all hover:-translate-y-1 hover:shadow-[10px_10px_10px_rgba(0,0,0,0.3)] cursor-pointer"
+    >
       <h1>{quiz_name}</h1>
       <div>{instructor}</div>
       <Rate allowHalf disabled defaultValue={() => roundNumber(score)} />

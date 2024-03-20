@@ -23,6 +23,7 @@ const successConfig = {
 const gelenUser = {
   email: "hamza@hamza.com",
   password: "123",
+  role: "teacher",
 };
 const validateMessages = {
   required: "${label} is required!",
