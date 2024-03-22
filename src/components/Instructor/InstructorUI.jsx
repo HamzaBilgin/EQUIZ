@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card } from "antd";
 
@@ -24,7 +24,7 @@ export const QuizUI = () => {
       >
         <Link to="/instructor/quiz" relative="path">
           <Button type="primary" ghost>
-            Quiz İşlemleri2
+            Quiz İşlemleri
           </Button>
         </Link>
       </Card>
