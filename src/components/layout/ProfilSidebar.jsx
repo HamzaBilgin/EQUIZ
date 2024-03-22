@@ -73,16 +73,7 @@ const ProfilSiderbar = () => {
               ]}
             />
           </Sider>
-          {/* <Button
-        type="text"
-        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={() => setCollapsed(!collapsed)}
-        style={{
-          fontSize: "16px",
-          width: 64,
-          height: 64,
-        }}
-      /> */}
+          <div className="z-50  h-dvh  fixed  top-0 right-0 cursor-pointer"></div>
         </Layout>
       )}
     </>
