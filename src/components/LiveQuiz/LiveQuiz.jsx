@@ -11,7 +11,7 @@ const initialState = {
 };
 const LiveQuiz = () => {
   const [quizResult, setQuizResult] = useState(initialState);
-
+  console.log(quizResult);
   const [count, setCount] = useState(0);
   const [finishModal, setFinishModal] = useState(0);
 
@@ -24,6 +24,9 @@ const LiveQuiz = () => {
   return (
     <div className="liveQuiz w-full flex justify-center relative">
       <Timer dbQuiz={dbQuiz} />
+      <div className="bg-red-500 mt-5 absolute right-[60px] text-3xl">
+        <button className="px-4">Finish</button>
+      </div>
       <QuestionCard
         dbQuiz={dbQuiz}
         quizResult={quizResult}
