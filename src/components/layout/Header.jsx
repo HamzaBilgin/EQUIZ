@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Button, Checkbox, Form, Input, Modal, notification } from "antd";
+const gelenUser = {
+  name: "Hamza",
+  email: "hamza@hamza.com",
+  password: "123",
+  role: "teacher",
+};
 const categoryItems = [
   {
     label: (
@@ -61,8 +69,31 @@ const top10Items = [
   },
 ];
 const Header = () => {
+  const isLogin = useSelector((state) => state.auth.isAuthenticated);
+  // login successful message start
+  const [api, contextHolder2] = notification.useNotification();
+
+  const openNotification = (placement) => {
+    api.info({
+      message: `Login Successfull`,
+      description: `Welcome, ${gelenUser.name}!`,
+      placement,
+    });
+  };
+  const contextValue = useMemo(
+    () => ({
+      name: "Ant Design",
+    }),
+    []
+  );
+  // login successful message start end
+  useEffect(() => {
+    if (isLogin) {
+      openNotification("topLeft");
+    }
+  }, [isLogin]);
   return (
-    <header className="fixed w-full top-0 left-0 bg-white z-10">
+    <header className="fixed w-full top-0 left-0 bg-red-300 z-10 absolute">
       <nav className=" border-gray-200 px-4 lg:px-4 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link to=".." relative="path" className="w-[300px]">
@@ -72,21 +103,26 @@ const Header = () => {
           </Link>
 
           <div className="flex items-center lg:order-2 w-[300px] justify-end">
-            <Link
-              to="/login"
-              relative="path"
-              className="text-gray-800  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-indigo-900/50 hover:text-white"
-            >
-              <span>Log in</span>
-            </Link>
+            {!isLogin && (
+              <>
+                <Link
+                  to="/login"
+                  relative="path"
+                  className="text-gray-800  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-indigo-900/50 hover:text-white"
+                >
+                  <span>Log in</span>
+                </Link>
 
-            <Link
-              to="/register"
-              relative="path"
-              className="text-gray-800  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-indigo-900/50 hover:text-white"
-            >
-              <span>Register</span>
-            </Link>
+                <Link
+                  to="/register"
+                  relative="path"
+                  className="text-gray-800  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-indigo-900/50 hover:text-white"
+                >
+                  <span>Register</span>
+                </Link>
+              </>
+            )}
+
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
@@ -158,6 +194,7 @@ const Header = () => {
           </div>
         </div>
       </nav>
+      {contextHolder2}
     </header>
   );
 };

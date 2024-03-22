@@ -17,7 +17,6 @@ const LiveQuiz = () => {
 
   const params = useParams();
 
-  console.log(quizResult);
   const dbQuiz = Quizzes.find((data) => {
     return data.category_name === params.categoryName && data.id == params.id;
   });

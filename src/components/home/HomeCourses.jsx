@@ -16,10 +16,7 @@ const HomeCourses = ({ data }) => {
           <QuizItem category_name={category_name} data={data} key={index} />
         ))}
 
-        <div
-          className="flex justify-center align-middle items-center mr-3  rounded-xl    text-center "
-          onClick={() => console.log(category_name)}
-        >
+        <div className="flex justify-center align-middle items-center mr-3  rounded-xl    text-center ">
           <div
             className={`flex justify-center align-middle items-center p-3 cursor-pointer ${animationStyles.midleToRight}`}
           >

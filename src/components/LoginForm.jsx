@@ -1,8 +1,10 @@
-import React, { useRef, createContext, usestate } from "react";
+import React, { useRef, createContext, usestate, useMemo } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Modal, Space } from "antd";
-import { Link } from "react-router-dom";
-const ReachableContext = createContext(null);
+import { Button, Checkbox, Form, Input, Modal, notification } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { authActions } from "../store/auth";
+import { useDispatch } from "react-redux";
+
 const errorConfig = {
   title: "Error!",
   content: (
@@ -11,20 +13,13 @@ const errorConfig = {
     </>
   ),
 };
-const successConfig = {
-  title: "Success!",
-  content: (
-    <>
-      <p>MEssage: success</p>
-    </>
-  ),
-};
-
 const gelenUser = {
+  name: "Hamza",
   email: "hamza@hamza.com",
   password: "123",
   role: "teacher",
 };
+
 const validateMessages = {
   required: "${label} is required!",
   types: {
@@ -47,28 +42,22 @@ const validateEmail = (_, value) => {
 
 const LoginForm = () => {
   const formRef = useRef();
+  const dispatch = useDispatch();
   const [modal, contextHolder] = Modal.useModal();
+  const navigate = useNavigate();
 
+  const navigateHomePage = () => {
+    navigate(`..`);
+  };
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
     validateUser(values.user, gelenUser)
       .then((successMessage) => {
-        console.log(successMessage);
-        modal.info({
-          ...successConfig,
+        dispatch(authActions.login());
 
-          okButtonProps: {
-            className: "ant-btn-default",
-            style: {
-              color: "rgba(0, 0, 0, 0.88)",
-            },
-          },
-        });
+        navigateHomePage();
         formRef.current.resetFields();
       })
       .catch((errorMessage) => {
-        console.log(errorMessage);
-
         modal.error({
           ...errorConfig,
 
