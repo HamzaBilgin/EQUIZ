@@ -94,8 +94,8 @@ const Header = () => {
   }, [isLogin]);
   return (
     <header className="fixed w-full top-0 left-0 bg-red-300 z-10 absolute">
-      <nav className=" border-gray-200 px-4 lg:px-4 py-2.5">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+      <nav className=" border-gray-200 px-4 lg:px-4">
+        <div className="h-14 flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link to=".." relative="path" className="w-[300px]">
             <span className="self-center text-xl font-semibold whitespace-nowrap">
               EQuiz
