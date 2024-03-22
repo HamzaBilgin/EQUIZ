@@ -11,6 +11,24 @@ import { authActions } from "../../store/auth.js";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Menu, Button, theme } from "antd";
 const { Header, Sider, Content } = Layout;
+function getItem(label, key, icon, children) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  };
+}
+const items = [
+  getItem("Hamza Bilgin", "1", <UserOutlined />, [
+    getItem("Tom", "11"),
+    getItem("Bill", "12"),
+    getItem("Alex", "13"),
+  ]),
+
+  getItem("Logout", "Logout", <AiOutlineLogout />),
+];
+
 const ProfilSiderbar = () => {
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
@@ -26,14 +44,13 @@ const ProfilSiderbar = () => {
     switch (item) {
       case "Logout":
         dispatch(authActions.logout());
+        setCollapsed(true);
         break;
       default:
         console.log(e.key);
     }
   };
-  const logOut = () => {
-    dispatch(authActions.logout());
-  };
+
   return (
     <>
       {isLogin && (
@@ -43,34 +60,13 @@ const ProfilSiderbar = () => {
           onMouseLeave={hoverSideBar}
         >
           <Sider trigger={null} collapsible collapsed={collapsed}>
-            <div className="demo-logo-vertical" />
+            <div className="demo-logo-vertical"></div>
             <Menu
               theme="dark"
               mode="inline"
               defaultSelectedKeys={["1"]}
               onClick={clickSideBarItem}
-              items={[
-                {
-                  key: "1",
-                  icon: <UserOutlined />,
-                  label: "nav 1",
-                },
-                {
-                  key: "2",
-                  icon: <VideoCameraOutlined />,
-                  label: "nav 2",
-                },
-                {
-                  key: "3",
-                  icon: <UploadOutlined />,
-                  label: "nav 3",
-                },
-                {
-                  key: "Logout",
-                  icon: <AiOutlineLogout />,
-                  label: "Logout",
-                },
-              ]}
+              items={items}
             />
           </Sider>
           <div className="z-50  h-dvh  fixed  top-0 right-0 cursor-pointer"></div>

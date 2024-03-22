@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialAuthState = {
   isAuthenticated: false,
-  isProfilSliderOpen: false,
 };
 
 const authSlice = createSlice({
