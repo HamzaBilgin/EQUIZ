@@ -1,10 +1,14 @@
 import React from "react";
-import { Button, Card } from "antd";
 
 const Result = () => {
   return (
     <div className="mt-[70px] w-full flex justify-center items-center mx-auto">
-      <p>resolt sayfası</p>;
+      <div className="">
+        <div></div>
+        <div>sınıf başarı ortalaması yatay cart,</div>
+        <div>best scoor</div>
+      </div>
+      <div>quize katılan öğrencilerin listesi</div>
     </div>
   );
 };
