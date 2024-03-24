@@ -16,6 +16,8 @@ import Quiz from "./components/Instructor/Quiz";
 import Result from "./components/Instructor/Result";
 import LiveQuizPage from "./pages/LiveQuiz";
 
+import QuizResultPage from "./pages/QuizResult";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "liveQuiz/:categoryName/:id/:totalQuestions",
         element: <LiveQuizPage />,
+      },
+      {
+        path: "liveQuiz/result",
+        element: <QuizResultPage />,
       },
     ],
   },
