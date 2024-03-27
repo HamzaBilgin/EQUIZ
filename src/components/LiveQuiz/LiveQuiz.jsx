@@ -59,7 +59,12 @@ const LiveQuiz = () => {
   const navigate = useNavigate();
 
   const finishQuiz = () => {
-    dispatch(quizResultActions.setResult({ data: questionsAnswers }));
+    dispatch(
+      quizResultActions.setResult({
+        data: questionsAnswers,
+        categoryName: params.categoryName,
+      })
+    );
     navigate("/liveQuiz/result");
   };
   return (

@@ -12,7 +12,8 @@ const quizResultSlice = createSlice({
   initialState: initialQuizResultState,
   reducers: {
     setResult(state, action) {
-      state.quizResult = action.payload.data;
+      const { categoryName, data } = action.payload;
+      state.quizResult = { categoryName, data };
     },
   },
 });

@@ -19,13 +19,25 @@ function getItem(label, key, icon, children) {
     label,
   };
 }
-const items = [
+const studentItems = [
   getItem("Hamza Bilgin", "1", <UserOutlined />, [
     getItem("Tom", "11"),
     getItem("Bill", "12"),
     getItem("Alex", "13"),
   ]),
-
+  getItem("Quizzes", "Quizzes", <AiOutlineLogout />),
+  getItem("QuizResults", "QuizResults", <AiOutlineLogout />),
+  getItem("Logout", "Logout", <AiOutlineLogout />),
+];
+const ınstructorItems = [
+  getItem("Hamza Bilgin", "1", <UserOutlined />, [
+    getItem("Tom", "11"),
+    getItem("Bill", "12"),
+    getItem("Alex", "13"),
+  ]),
+  getItem("Make Quiz", "makeQuiz", <AiOutlineLogout />),
+  getItem("Quizzes", "Quizzes", <AiOutlineLogout />),
+  getItem("Istatistic", "Istatistic", <AiOutlineLogout />),
   getItem("Logout", "Logout", <AiOutlineLogout />),
 ];
 
@@ -66,7 +78,7 @@ const ProfilSiderbar = () => {
               mode="inline"
               defaultSelectedKeys={["1"]}
               onClick={clickSideBarItem}
-              items={items}
+              items={studentItems}
             />
           </Sider>
           <div className="z-50  h-dvh  fixed  top-0 right-0 cursor-pointer"></div>

@@ -45,7 +45,17 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const [modal, contextHolder] = Modal.useModal();
   const navigate = useNavigate();
-
+  // const getUser = async (email) => {
+  //   fetch(`http://localhost:3000/user?email=${email}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       return data;
+  //     })
+  //     .catch((err) => {
+  //       throw new Error(err);
+  //     });
+  // };
   const navigateHomePage = () => {
     navigate(`..`);
   };
