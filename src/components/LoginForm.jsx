@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { authActions } from "../store/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { userInfoActions } from "../store/userInfo";
+
 import axios from "axios";
 const errorConfig = {
   title: "Error!",
@@ -66,7 +67,10 @@ const LoginForm = () => {
     validateUser(values.user, data)
       .then((successMessage) => {
         dispatch(authActions.login());
+        const isAuthenticated = JSON.stringify(true);
 
+        localStorage.setItem("isAuthenticated", isAuthenticated);
+        localStorage.setItem("userLoginInfo", JSON.stringify(data));
         navigateHomePage();
         formRef.current.resetFields();
       })

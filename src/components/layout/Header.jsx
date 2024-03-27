@@ -1,91 +1,34 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button, Checkbox, Form, Input, Modal, notification } from "antd";
-const gelenUser = {
-  name: "Hamza",
-  email: "hamza@hamza.com",
-  password: "123",
-  role: "teacher",
-};
-const categoryItems = [
-  {
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="#">
-        Fizik
-      </a>
-    ),
-    key: "0",
-  },
-  {
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="#">
-        Kimya
-      </a>
-    ),
-    key: "1",
-  },
-  {
-    type: "divider",
-  },
-  {
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="#">
-        Diğer Dersler İcin Tıklayınız
-      </a>
-    ),
-    key: "3",
-  },
-];
-const top10Items = [
-  {
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="#">
-        Fizik
-      </a>
-    ),
-    key: "0",
-  },
-  {
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="#">
-        Kimya
-      </a>
-    ),
-    key: "1",
-  },
-  {
-    type: "divider",
-  },
-  {
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="#">
-        Diğer Quizler İcin Tıklayınız
-      </a>
-    ),
-    key: "3",
-  },
-];
+import animationStyles from "../../ModüleCss/Animations.module.css";
+
 const Header = () => {
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
+  const userLoginInfo = useSelector(
+    (state) => state.userInfoReducer.userLoginInfo
+  );
+  const [liveInputCollapsed, setLiveInputCollapsed] = useState(null);
+
   // login successful message start
   const [api, contextHolder2] = notification.useNotification();
 
   const openNotification = (placement) => {
     api.info({
       message: `Login Successfull`,
-      description: `Welcome, ${gelenUser.name}!`,
+      description: `Welcome, ${userLoginInfo.name}!`,
       placement,
     });
   };
-  const contextValue = useMemo(
-    () => ({
-      name: "Ant Design",
-    }),
-    []
-  );
+  // const contextValue = useMemo(
+  //   () => ({
+  //     name: "Ant Design",
+  //   }),
+  //   []
+  // );
   // login successful message start end
   useEffect(() => {
     if (isLogin) {
@@ -93,7 +36,7 @@ const Header = () => {
     }
   }, [isLogin]);
   return (
-    <header className="fixed w-full top-0 left-0 bg-red-300 z-10 absolute">
+    <header className="fixed w-full top-0 left-0 bg-red-300 z-10 absolute ">
       <nav className=" border-gray-200 px-4 lg:px-4">
         <div className="h-14 flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link to=".." relative="path" className="w-[300px]">
@@ -157,40 +100,34 @@ const Header = () => {
               </svg>
             </button>
           </div>
-          <div
-            className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
-            id="mobile-menu-2"
-          >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 w-[300px] items-center justify-center">
-              <li className="cursor-pointer">
-                <Dropdown
-                  menu={{
-                    items: categoryItems,
-                  }}
-                >
-                  <a onClick={(e) => e.preventDefault()}>
-                    <Space>
-                      Kategori
-                      <DownOutlined />
-                    </Space>
-                  </a>
-                </Dropdown>
-              </li>
-              <li className="cursor-pointer">
-                <Dropdown
-                  menu={{
-                    items: top10Items,
-                  }}
-                >
-                  <a onClick={(e) => e.preventDefault()}>
-                    <Space>
-                      Top 10
-                      <DownOutlined />
-                    </Space>
-                  </a>
-                </Dropdown>
-              </li>
-            </ul>
+          <div className="relative">
+            <div
+              className="border hidden  items-center w-full lg:flex lg:w-auto lg:order-1"
+              id="mobile-menu-2"
+            >
+              <button
+                className="px-2 "
+                onClick={() =>
+                  setLiveInputCollapsed(
+                    liveInputCollapsed === null ? true : !liveInputCollapsed
+                  )
+                }
+              >
+                Live Quiz
+              </button>
+              <input
+                className={`w-0 ${
+                  liveInputCollapsed === null
+                    ? ""
+                    : liveInputCollapsed
+                    ? `pl-2 ${animationStyles.extendToRight}`
+                    : animationStyles.collepseToLeft
+                }`}
+                type="text"
+                placeholder="Please enter quiz id"
+              />
+            </div>
+            <div className="w-full absolute text-center">Quiz bulunamadı </div>
           </div>
         </div>
       </nav>

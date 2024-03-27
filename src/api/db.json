@@ -42,21 +42,88 @@
       "Role": "teacher"
     }
   ],
-  "comments": [
+  "quizzes": [
     {
-      "id": "1",
-      "text": "a comment about post 1",
-      "postId": "1"
-    },
-    {
-      "id": "2",
-      "text": "another comment about post 1",
-      "postId": "1"
-    },
-    {
-      "id": "3",
-      "text": "another comment about post 1",
-      "postId": "1"
+      "category_name": "Mathematics",
+      "id": 1,
+      "live_id" : "live1",
+      "quizTimer": 10,
+      "questions": [
+        {
+          "question": "Bir üçgenin üç iç açısının toplamı kaç derecedir?",
+          "options": ["90 derece", "120 derece", "180 derece", "270 derece"],
+          "correctAnswer": "180 derece"
+        },
+        {
+          "question": "Bir üçgenin kaç tane kenarı vardır?",
+          "options": ["2 kenar", "3 kenar", "4 kenar", "5 kenar"],
+          "correctAnswer": "3 kenar"
+        },
+        {
+          "question": "Bir üçgenin tüm kenarları eşitse bu üçgene ne ad verilir?",
+          "options": [
+            "Dik üçgen",
+            "Çeşitkenar üçgen",
+            "İkizkenar üçgen",
+            "Eşkenar üçgen"
+          ],
+          "correctAnswer": "Eşkenar üçgen"
+        },
+        {
+          "question": "Bir üçgenin iki kenarı eşitse bu üçgene ne ad verilir?",
+          "options": [
+            "Dik üçgen",
+            "Çeşitkenar üçgen",
+            "İkizkenar üçgen",
+            "Eşkenar üçgen"
+          ],
+          "correctAnswer": "İkizkenar üçgen"
+        },
+        {
+          "question":
+            "Bir üçgenin hiçbir kenarı eşit değilse bu üçgene ne ad verilir?",
+          "options": [
+            "Dik üçgen",
+            "Çeşitkenar üçgen",
+            "İkizkenar üçgen",
+            "Eşkenar üçgen"
+          ],
+          "correctAnswer": "Çeşitkenar üçgen"
+        },
+        {
+          "question": "Bir üçgenin iç açılarından en büyüğüne ne ad verilir?",
+          "options": ["Dik açı", "Açıortay", "Küçük açı", "Dik üçgen"],
+          "correctAnswer": "Açıortay"
+        },
+        {
+          "question":
+            "Bir üçgenin taban uzunluğu ile yüksekliği çarpımının yarısına ne ad verilir?",
+          "options": ["Çevre", "Alan", "Üçgen", "Taban"],
+          "correctAnswer": "Alan"
+        },
+        {
+          "question": "Bir üçgenin çevresi nasıl hesaplanır?",
+          "options": [
+            "Tüm açılarının toplamı",
+            "Alanının yarısı",
+            "Tüm kenar uzunluklarının toplamı",
+            "Hipotenüs"
+          ],
+          "correctAnswer": "Tüm kenar uzunluklarının toplamı"
+        },
+        {
+          "question":
+            "Bir dik üçgenin dik açısının karşısındaki kenara ne ad verilir?",
+          "options": ["Hipotenüs", "Alan", "Taban", "Çevre"],
+          "correctAnswer": "Hipotenüs"
+        },
+        {
+          "question":
+            "Bir üçgenin iç açılarından ikisi 70 derece ise üçüncü açı kaç derecedir?",
+          "options": ["20 derece", "30 derece", "40 derece", "50 derece"],
+          "correctAnswer": "40 derece"
+        }
+      ]
     }
   ],
   "profile": {

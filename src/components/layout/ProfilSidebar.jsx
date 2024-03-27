@@ -57,6 +57,7 @@ const ProfilSiderbar = () => {
       getItem("Alex", "13"),
     ]),
   ];
+  console.log(userLoginInfo);
   if (userLoginInfo.role === "teacher") {
     sliderItem = [
       ...sliderItem,
@@ -89,6 +90,7 @@ const ProfilSiderbar = () => {
       case "Logout":
         dispatch(authActions.logout());
         setCollapsed(true);
+        localStorage.clear();
         break;
       default:
       // console.log(e.key);
