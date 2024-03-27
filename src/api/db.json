@@ -1,38 +1,65 @@
 {
-    "user": [
-      {
-        "id" : 1,
-        "name": "Hamza",
-        "email": "hamza@hamza.com",
-        "password": "123",
-        "role": "teacher"
-      },
-      {
-        "id" : 2,
-        "name": "Hüseyin",
-        "email": "Hüseyin@Hüseyin.com",
-        "password": "123",
-        "role": "student"
-      }
-    ],
-    "comments": [
-      {
-        "id": "1",
-        "text": "a comment about post 1",
-        "postId": "1"
-      },
-      {
-        "id": "2",
-        "text": "another comment about post 1",
-        "postId": "1"
-      },
-      {
-        "id": "3",
-        "text": "another comment about post 1",
-        "postId": "1"
-      }
-    ],
-    "profile": {
-      "name": "typicode"
+  "user": [
+    {
+      "id": "1",
+      "name": "Hamza",
+      "email": "hamza@hamza.com",
+      "password": "123",
+      "role": "teacher"
+    },
+    {
+      "id": "2",
+      "name": "Hüseyin",
+      "email": "Hüseyin@Hüseyin.com",
+      "password": "123",
+      "role": "student"
+    },
+    {
+      "id": "c5df",
+      "password": "123",
+      "name": "Hamza",
+      "surname": "Bilgin",
+      "email": "hamza4252015@gmail.com",
+      "phoneNumber": "05437164098",
+      "Role": "student"
+    },
+    {
+      "id": "00df",
+      "password": "123",
+      "name": "Hamza",
+      "surname": "Bilgin",
+      "email": "hamza4252015@gmail.com1",
+      "phoneNumber": "05437164098",
+      "Role": "student"
+    },
+    {
+      "id": "6f85",
+      "password": "123",
+      "name": "Hamza111",
+      "surname": "Bilgin",
+      "email": "hamza4252016@gmail.com",
+      "phoneNumber": "05437164098",
+      "Role": "teacher"
     }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "3",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
   }
+}

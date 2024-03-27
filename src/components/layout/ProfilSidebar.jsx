@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -11,6 +11,7 @@ import { authActions } from "../../store/auth.js";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Menu, Button, theme } from "antd";
 const { Header, Sider, Content } = Layout;
+
 function getItem(label, key, icon, children) {
   return {
     key,
@@ -19,29 +20,60 @@ function getItem(label, key, icon, children) {
     label,
   };
 }
-const studentItems = [
-  getItem("Hamza Bilgin", "1", <UserOutlined />, [
-    getItem("Tom", "11"),
-    getItem("Bill", "12"),
-    getItem("Alex", "13"),
-  ]),
-  getItem("Quizzes", "Quizzes", <AiOutlineLogout />),
-  getItem("QuizResults", "QuizResults", <AiOutlineLogout />),
-  getItem("Logout", "Logout", <AiOutlineLogout />),
-];
-const ınstructorItems = [
-  getItem("Hamza Bilgin", "1", <UserOutlined />, [
-    getItem("Tom", "11"),
-    getItem("Bill", "12"),
-    getItem("Alex", "13"),
-  ]),
-  getItem("Make Quiz", "makeQuiz", <AiOutlineLogout />),
-  getItem("Quizzes", "Quizzes", <AiOutlineLogout />),
-  getItem("Istatistic", "Istatistic", <AiOutlineLogout />),
-  getItem("Logout", "Logout", <AiOutlineLogout />),
-];
-
+//  const userLoginInfo = useSelector(
+//     (state) => state.userInfoReducer.userLoginInfo
+//   );
+let sliderItem = [];
+// const studentItems = [
+//   getItem("Hamza Bilgin", "1", <UserOutlined />, [
+//     getItem("Tom", "11"),
+//     getItem("Bill", "12"),
+//     getItem("Alex", "13"),
+//   ]),
+//   getItem("Quizzes", "Quizzes", <AiOutlineLogout />),
+//   getItem("QuizResults", "QuizResults", <AiOutlineLogout />),
+//   getItem("Logout", "Logout", <AiOutlineLogout />),
+// ];
+// const ınstructorItems = [
+//   getItem("a", "1", <UserOutlined />, [
+//     getItem("Tom", "11"),
+//     getItem("Bill", "12"),
+//     getItem("Alex", "13"),
+//   ]),
+//   getItem("Make Quiz", "makeQuiz", <AiOutlineLogout />),
+//   getItem("Quizzes", "Quizzes", <AiOutlineLogout />),
+//   getItem("Istatistic", "Istatistic", <AiOutlineLogout />),
+//   getItem("Logout", "Logout", <AiOutlineLogout />),
+// ];
 const ProfilSiderbar = () => {
+  const userLoginInfo = useSelector(
+    (state) => state.userInfoReducer.userLoginInfo
+  );
+
+  sliderItem = [
+    getItem(userLoginInfo.name, "1", <UserOutlined />, [
+      getItem("Tom", "11"),
+      getItem("Bill", "12"),
+      getItem("Alex", "13"),
+    ]),
+  ];
+  if (userLoginInfo.role === "teacher") {
+    sliderItem = [
+      ...sliderItem,
+      getItem("Make Quiz", "makeQuiz", <AiOutlineLogout />),
+      getItem("Quizzes", "Quizzes", <AiOutlineLogout />),
+      getItem("Istatistic", "Istatistic", <AiOutlineLogout />),
+      getItem("Logout", "Logout", <AiOutlineLogout />),
+    ];
+  } else {
+    sliderItem = [
+      ...sliderItem,
+      getItem("Quizzes", "Quizzes", <AiOutlineLogout />),
+      getItem("QuizResults", "QuizResults", <AiOutlineLogout />),
+      getItem("Logout", "Logout", <AiOutlineLogout />),
+    ];
+  }
+
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   const [collapsed, setCollapsed] = useState(true);
@@ -59,7 +91,7 @@ const ProfilSiderbar = () => {
         setCollapsed(true);
         break;
       default:
-        console.log(e.key);
+      // console.log(e.key);
     }
   };
 
@@ -78,7 +110,7 @@ const ProfilSiderbar = () => {
               mode="inline"
               defaultSelectedKeys={["1"]}
               onClick={clickSideBarItem}
-              items={studentItems}
+              items={sliderItem}
             />
           </Sider>
           <div className="z-50  h-dvh  fixed  top-0 right-0 cursor-pointer"></div>

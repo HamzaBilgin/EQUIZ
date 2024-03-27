@@ -3,21 +3,16 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Modal, notification } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { authActions } from "../store/auth";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { userInfoActions } from "../store/userInfo";
+import axios from "axios";
 const errorConfig = {
   title: "Error!",
   content: (
     <>
-      <p>MEssage: Unsuccess</p>
+      <p>Message: Unsuccess</p>
     </>
   ),
-};
-const gelenUser = {
-  name: "Hamza",
-  email: "hamza@hamza.com",
-  password: "123",
-  role: "teacher",
 };
 
 const validateMessages = {
@@ -45,22 +40,30 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const [modal, contextHolder] = Modal.useModal();
   const navigate = useNavigate();
+
+  const navigateHomePage = () => {
+    navigate(`..`);
+  };
+
   // const getUser = async (email) => {
   //   fetch(`http://localhost:3000/user?email=${email}`)
   //     .then((response) => response.json())
   //     .then((data) => {
-  //       console.log(data);
   //       return data;
   //     })
   //     .catch((err) => {
   //       throw new Error(err);
   //     });
   // };
-  const navigateHomePage = () => {
-    navigate(`..`);
+  const getUser2 = async (email) => {
+    const data = await axios.get(`http://localhost:3000/user?email=${email}`);
+    return data;
   };
-  const onFinish = (values) => {
-    validateUser(values.user, gelenUser)
+  const onFinish = async (values) => {
+    // console.log(userLoginInfo);
+    const data = await getUser2(values.user.email);
+
+    validateUser(values.user, data)
       .then((successMessage) => {
         dispatch(authActions.login());
 
@@ -81,9 +84,11 @@ const LoginForm = () => {
         });
       });
   };
-  const validateUser = (inputUser, dbUser) => {
+  const validateUser = (inputUser, data) => {
+    const password = data.data[0].password;
     return new Promise((resolve, reject) => {
-      if (dbUser != null && dbUser.password == inputUser.password) {
+      if (data != null && password == inputUser.password) {
+        dispatch(userInfoActions.setUserInfo(data.data[0]));
         resolve("Login Succesful");
       } else {
         reject("Please control email and password");

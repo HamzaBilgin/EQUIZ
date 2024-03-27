@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import { Button, Form, Input, Radio, Modal } from "antd";
 const isExistingEmail = true;
 const layout = {
@@ -45,15 +45,55 @@ const validateEmail = (_, value) => {
 const RegisterForm = () => {
   const formRef = useRef();
   const [userData, setUserData] = useState({});
-  const onFinish = ({ password, user }) => {
-    formRef.current.submit();
-    setUserData({ password, ...user });
-    formRef.current.resetFields();
+  const [modal, contextHolder] = Modal.useModal();
+  const errorConfig = {
+    title: "Error!",
+    content: (
+      <>
+        <p>Message: Unsuccess</p>
+      </>
+    ),
   };
+
+  const onFinish = async ({ password, user }) => {
+    // setUserData({ password, ...user });
+    formRef.current.resetFields();
+    const data = await axios.get(
+      `http://localhost:3000/user?email=${user.email}`
+    );
+
+    if (data.data[0]) {
+      modal.error({
+        title: "Error!",
+        content: (
+          <>
+            <p>Registered User</p>
+          </>
+        ),
+
+        okButtonProps: {
+          className: "ant-btn-error",
+          style: {
+            color: "rgba(255, 255, 255, 1)",
+            backgroundColor: "rgba(255, 0, 0, 0.88)",
+          },
+        },
+      });
+      return;
+    }
+    fetch("http://localhost:3000/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ password, ...user }),
+    });
+    setUserData({});
+  };
+  // const isExistUser = async (email) => {};
   const handleSubmit = () => {
     formRef.current.submit();
   };
-
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
@@ -68,7 +108,7 @@ const RegisterForm = () => {
         console.error("Form validation failed:", err);
       });
   };
-  console.log(userData);
+
   const handleOk = () => {
     setModalText("The modal will be closed after two seconds");
     handleSubmit();
@@ -151,7 +191,7 @@ const RegisterForm = () => {
         <Form.Item name={["user", "Role"]} label="Radio">
           <Radio.Group>
             <Radio value="student"> Student </Radio>
-            <Radio value="pear"> Teacher </Radio>
+            <Radio value="teacher"> Teacher </Radio>
           </Radio.Group>
         </Form.Item>
 
@@ -220,6 +260,7 @@ const RegisterForm = () => {
           </Modal>
         </Form.Item>
       </Form>
+      {contextHolder}
     </div>
   );
 };
