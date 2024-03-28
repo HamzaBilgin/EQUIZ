@@ -57,7 +57,6 @@ const ProfilSiderbar = () => {
       getItem("Alex", "13"),
     ]),
   ];
-  console.log(userLoginInfo);
   if (userLoginInfo.role === "teacher") {
     sliderItem = [
       ...sliderItem,

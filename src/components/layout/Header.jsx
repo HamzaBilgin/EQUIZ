@@ -1,18 +1,43 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button, Checkbox, Form, Input, Modal, notification } from "antd";
 import animationStyles from "../../ModüleCss/Animations.module.css";
-
+import axios from "axios";
 const Header = () => {
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
   const userLoginInfo = useSelector(
     (state) => state.userInfoReducer.userLoginInfo
   );
+  const serchQuizRef = useRef();
   const [liveInputCollapsed, setLiveInputCollapsed] = useState(null);
+  const [liveQuizStartError, setLiveQuizStartError] = useState(false);
+  const checkQuizExist = async (id) => {
+    const data = await axios.get(`http://localhost:3000/quizzes?live_id=${id}`);
 
+    return new Promise((resolve, reject) => {
+      if (data.data.length != 0) {
+        resolve(data.data);
+      } else {
+        reject(null);
+      }
+    });
+  };
+  const startQuiz = async () => {
+    // const quiz = await axios.get(
+    //   `http://localhost:3000/quizzes?live_id=${serchQuizRef.current.value}`
+    // );
+    checkQuizExist(serchQuizRef.current.value)
+      .then((item) => {
+        setLiveQuizStartError(false);
+        console.log(item);
+      })
+      .catch((item) => {
+        setLiveQuizStartError(!liveQuizStartError);
+      });
+  };
   // login successful message start
   const [api, contextHolder2] = notification.useNotification();
 
@@ -23,20 +48,20 @@ const Header = () => {
       placement,
     });
   };
-  // const contextValue = useMemo(
-  //   () => ({
-  //     name: "Ant Design",
-  //   }),
-  //   []
-  // );
-  // login successful message start end
+
   useEffect(() => {
     if (isLogin) {
       openNotification("topLeft");
     }
   }, [isLogin]);
   return (
-    <header className="fixed w-full top-0 left-0 bg-red-300 z-10 absolute ">
+    <header
+      className={`fixed w-full top-0 left-0 bg-red-300 z-10 absolute ${
+        liveQuizStartError === true
+          ? animationStyles.upToDownNavbar
+          : animationStyles.downToUpNavbar
+      }`}
+    >
       <nav className=" border-gray-200 px-4 lg:px-4">
         <div className="h-14 flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link to=".." relative="path" className="w-[300px]">
@@ -115,19 +140,35 @@ const Header = () => {
               >
                 Live Quiz
               </button>
-              <input
-                className={`w-0 ${
+              <div
+                className={`w-0 overflow-hidden ${
                   liveInputCollapsed === null
                     ? ""
                     : liveInputCollapsed
                     ? `pl-2 ${animationStyles.extendToRight}`
                     : animationStyles.collepseToLeft
-                }`}
-                type="text"
-                placeholder="Please enter quiz id"
-              />
+                } flex`}
+              >
+                <input
+                  className="w-[160px]"
+                  type="text"
+                  placeholder="Please enter quiz id"
+                  ref={serchQuizRef}
+                />
+                <button className="w-[50px] px-2" onClick={startQuiz}>
+                  start
+                </button>
+              </div>
             </div>
-            <div className="w-full absolute text-center">Quiz bulunamadı </div>
+            <div
+              className={`w-full absolute text-center ${
+                liveQuizStartError
+                  ? animationStyles.upToDownDropDown
+                  : animationStyles.downToUpDropDown
+              }`}
+            >
+              Quiz bulunamadı{" "}
+            </div>
           </div>
         </div>
       </nav>
